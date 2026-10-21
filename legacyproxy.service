@@ -1,0 +1,15 @@
+# systemd unit for Raspberry Pi OS. Adjust the paths and user, then:
+#   sudo cp legacyproxy.service /etc/systemd/system/
+#   sudo systemctl enable --now legacyproxy
+[Unit]
+Description=LegacyProxy for vintage web browsers
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=pi
+ExecStart=/usr/bin/python3 /home/pi/legacyproxy/proxy.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
